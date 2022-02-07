@@ -78,4 +78,4 @@ Expand-Archive config.zip BepInEx/config
 Write-Host "Cleaning Up"
 Remove-Item BepInEx.zip
 Remove-Item BepInEx.MelonLoader.Loader.7z
-Remote-Item config.zip
+Remove-Item config.zip
