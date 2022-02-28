@@ -12,3 +12,5 @@ A script to create a [BepInEx](https://github.com/BepInEx/) installation paralle
 4. Fetch, download, and extract bleeding [BepInEx](https://github.com/BepInEx/BepInEx)
 5. Download and extract [BepInEx.MelonLoader.Loader](https://github.com/BepInEx/BepInEx.MelonLoader.Loader)
 6. Download and extract configuration from a file in this repository
+
+Note: It seems that hardlinked files don't get updated by Steam, you may need to manually update `GameAssembly.dll`
