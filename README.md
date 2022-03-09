@@ -4,6 +4,7 @@ A script to create a [BepInEx](https://github.com/BepInEx/) installation paralle
 # Usage
 1. Download [ml2bie.ps1](https://raw.githubusercontent.com/xKiraiChan/ML2BIE/master/ml2bie.ps1)
 2. Right click on the file and select "Run with PowerShell"
+3. Wait for a file explorer window to open, you need to now extract `BepInEx.MelonLoader.Loader.7z`
 
 # Overview of script
 1. Locate the game
