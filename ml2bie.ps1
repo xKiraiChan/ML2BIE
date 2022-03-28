@@ -1,4 +1,4 @@
-﻿Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Windows.Forms
 $FileBrowser = New-Object System.Windows.Forms.OpenFileDialog -Property @{ 
     Filter = 'Game Installation (*.exe)|*.exe'
 }
@@ -28,7 +28,6 @@ cmd.exe /c mklink /H `"$bie/VRChat.exe`" `"$ml/VRChat.exe`";
 cmd.exe /c mklink /H `"$bie/GameAssembly.dll`" `"$ml/GameAssembly.dll`";
 cmd.exe /c mklink /H `"$bie/UnityPlayer.dll`" `"$ml/UnityPlayer.dll`";
 cmd.exe /c mklink /J `"$bie/$ml`_Data`" `"$ml/$ml`_Data`";
-cmd.exe /c mklink /J `"$bie/UserData`" `"$ml/UserData`";
 
 if (Test-Path "$ml/RubyClient") {
     Write-Host "Creating Ruby links";
@@ -41,6 +40,11 @@ New-Item -ItemType Directory "$bie/MelonLoader";
 cmd.exe /c mklink /J `"$bie/MelonLoader/Mods`" `"$ml/Mods`";
 cmd.exe /c mklink /J `"$bie/MelonLoader/Plugins`" `"$ml/Plugins`";
 cmd.exe /c mklink /J `"$bie/MelonLoader/UserData`" `"$ml/UserData`";
+
+# for the stupid mods that hardcode paths
+cmd.exe /c mklink /J `"$bie/Mods`" `"$ml/UserData`";
+cmd.exe /c mklink /J `"$bie/Plugins`" `"$ml/UserData`";
+cmd.exe /c mklink /J `"$bie/UserData`" `"$ml/UserData`";
 
 Write-Host "Creating BepInEx links";
 New-Item -ItemType Directory "$bie/BepInEx";
@@ -59,23 +63,13 @@ if (!(Test-Path "BepInEx.zip")) {
 }
 
 Expand-Archive BepInEx.zip .;
+Remove-Item BepInEx.zip
 
-if (!(Test-Path "BepInEx.MelonLoader.Loader.7z")) {
-    Write-Output "Downloading BepInEx.MelonLoader.Loader..."
-    Invoke-WebRequest "https://github.com/BepInEx/BepInEx.MelonLoader.Loader/releases/download/v1.2/BepInEx.MelonLoader.Loader.v1.2.7z" -OutFile BepInEx.MelonLoader.Loader.7z
-} else {
-    Write-Output "BepInEx.MelonLoader.Loader is already downloaded"
-}
 
-Write-Host "Please unzip ``BepInEx.MelonLoader.Loader.7z`` into the opened folder"
-Start-Process .
-pause
-
+Invoke-WebRequest "https://github.com/xKiraiChan/ML2BIE/raw/master/BepInEx.MelonLoader.Loader.zip" -OutFile BepInEx.MelonLoader.Loader.zip
+Expand-Archive BepInEx.MelonLoader.Loader.zip .
+Remove-Item BepInEx.MelonLoader.Loader.zip
 
 Invoke-WebRequest "https://github.com/xKiraiChan/ML2BIE/raw/master/config.zip" -OutFile config.zip
-Expand-Archive config.zip BepInEx/config
-
-Write-Host "Cleaning Up"
-Remove-Item BepInEx.zip
-Remove-Item BepInEx.MelonLoader.Loader.7z
+Expand-Archive -Force config.zip BepInEx/config
 Remove-Item config.zip
