@@ -42,8 +42,8 @@ cmd.exe /c mklink /J `"$bie/MelonLoader/Plugins`" `"$ml/Plugins`";
 cmd.exe /c mklink /J `"$bie/MelonLoader/UserData`" `"$ml/UserData`";
 
 # for the stupid mods that hardcode paths
-cmd.exe /c mklink /J `"$bie/Mods`" `"$ml/UserData`";
-cmd.exe /c mklink /J `"$bie/Plugins`" `"$ml/UserData`";
+cmd.exe /c mklink /J `"$bie/Mods`" `"$ml/Mods`";
+cmd.exe /c mklink /J `"$bie/Plugins`" `"$ml/Plugins`";
 cmd.exe /c mklink /J `"$bie/UserData`" `"$ml/UserData`";
 
 Write-Host "Creating BepInEx links";
